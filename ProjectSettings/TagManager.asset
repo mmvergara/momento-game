@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Apple
   - FireTrap
+  - GameLogic
+  - Void
+  - Spike
   layers:
   - Default
   - TransparentFX
