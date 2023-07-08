@@ -83,6 +83,6 @@ public class PlayerMovement : MonoBehaviour
         boxCastOrigin.y -= yOffset;
         Physics2D.BoxCast(boxCastOrigin, coll.bounds.size, 0, Vector2.down, .1f, jumpableGround);
 
-        return state != MovementState.falling && state != MovementState.jumping;
+        return (state != MovementState.falling && state != MovementState.jumping) || (Physics2D.BoxCast(boxCastOrigin, coll.bounds.size, 0, Vector2.down, .1f, jumpableGround));
     }
 }
