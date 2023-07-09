@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float jumpHeight = 14f;
+    [SerializeField] float jumpHeight = 16f;
     [SerializeField] private LayerMask jumpableGround;
 
     private Rigidbody2D rb;
@@ -29,9 +29,18 @@ public class PlayerMovement : MonoBehaviour
         float dirX = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(dirX * 7f, rb.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && isGrounded())
+
+        if (isGrounded() &&Input.GetButtonDown("Jump") )
         {
             rb.velocity = new Vector2 (rb.velocity.x, jumpHeight);
+        }
+
+        // Explain this code snippet:
+        // if we are jumping and we release the jump button, we cut the jump short
+        // by setting the y velocity to half of what it was
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * .5f);
         }
 
         UpdateAnimation(dirX);
