@@ -43,7 +43,7 @@ public class PlayerLife : MonoBehaviour
         anim.SetTrigger("DeathTrigger");
         rb.bodyType = RigidbodyType2D.Static;
     }
-
+    
     private void restartLevel()
     {
         gl.restartLevel();
