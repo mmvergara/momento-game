@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float jumpHeight = 16f;
     [SerializeField] private LayerMask jumpableGround;
+    private float jumpBufferTime = 0.1f;
+    private float jumpBufferCounter; 
 
     private Rigidbody2D rb;
     private BoxCollider2D coll;
@@ -30,9 +32,16 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(dirX * 7f, rb.velocity.y);
 
 
-        if (isGrounded() &&Input.GetButtonDown("Jump") )
-        {
+        if (Input.GetButtonDown("Jump")){
+            jumpBufferCounter = jumpBufferTime;
+        } else {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+
+        if (isGrounded() && jumpBufferCounter > 0f)
+        { 
             rb.velocity = new Vector2 (rb.velocity.x, jumpHeight);
+            jumpBufferCounter = 0f;
         }
 
         // Explain this code snippet:
