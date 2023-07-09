@@ -28,7 +28,7 @@ public class PlayerLife : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        string[] CollisionDeathTags = { "Spike" };
+        string[] CollisionDeathTags = { "Spike","Saw" };
         for (int i = 0; i < CollisionDeathTags.Length; i++)
         {
             if (collision.gameObject.CompareTag(CollisionDeathTags[i]))

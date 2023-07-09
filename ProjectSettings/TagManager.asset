@@ -9,6 +9,7 @@ TagManager:
   - GameLogic
   - Void
   - Spike
+  - Saw
   layers:
   - Default
   - TransparentFX

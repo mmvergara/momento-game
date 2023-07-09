@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float jumpHeight = 16f;
     [SerializeField] private LayerMask jumpableGround;
+    [SerializeField] private AudioSource jumpSound;
     private float jumpBufferTime = 0.1f;
     private float jumpBufferCounter; 
 
@@ -39,12 +40,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (isGrounded() && jumpBufferCounter > 0f)
-        { 
+        {
+            Debug.Log("JUMP");
+            jumpSound.Play();
             rb.velocity = new Vector2 (rb.velocity.x, jumpHeight);
             jumpBufferCounter = 0f;
         }
 
-        // Explain this code snippet:
         // if we are jumping and we release the jump button, we cut the jump short
         // by setting the y velocity to half of what it was
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)

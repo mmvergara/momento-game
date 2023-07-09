@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Apple : MonoBehaviour
 {
-    public Animator anim;
+    private Animator anim;
+    [SerializeField] private AudioSource collectSound;
 
     void Start()
     {
@@ -15,6 +16,7 @@ public class Apple : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            collectSound.Play();
             anim.SetBool("isCollected", true);
         }
     }
