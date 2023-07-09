@@ -5,12 +5,6 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public GameObject player;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void LateUpdate()
     {
         transform.position = new Vector3(player.transform.position.x, transform.position.y, -14f);
