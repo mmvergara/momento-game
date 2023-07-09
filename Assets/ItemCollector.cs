@@ -17,6 +17,5 @@ public class ItemCollector : MonoBehaviour
             Debug.Log("total apples = "+ appleCount.ToString());
             appleCounterText.text = "Apples: "+ appleCount.ToString();
         }
-
     }
 }
