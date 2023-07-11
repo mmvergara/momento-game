@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpHeight = 16f;
     [SerializeField] private LayerMask jumpableGround;
     [SerializeField] private AudioSource jumpSound;
+    public float movementSpeed = 7.3f;
     private float jumpBufferTime = 0.1f;
     private float jumpBufferCounter; 
 
@@ -16,12 +17,10 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator anim;
 
-
     private enum MovementState { idle, running, falling, jumping }
 
     private MovementState state = MovementState.idle;
-    void Start()
-    {
+    void Start() {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         coll = GetComponent<BoxCollider2D>();
@@ -30,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update() {
         float dirX = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(dirX * 7f, rb.velocity.y);
+        rb.velocity = new Vector2(dirX * movementSpeed, rb.velocity.y);
 
 
         if (Input.GetButtonDown("Jump")){
@@ -39,58 +38,40 @@ public class PlayerMovement : MonoBehaviour
             jumpBufferCounter -= Time.deltaTime;
         }
 
-        if (isGrounded() && jumpBufferCounter > 0f)
-        {
+        if (isGrounded() && jumpBufferCounter > 0f){
             Debug.Log("JUMP");
             jumpSound.Play();
             rb.velocity = new Vector2 (rb.velocity.x, jumpHeight);
             jumpBufferCounter = 0f;
         }
 
-        // if we are jumping and we release the jump button, we cut the jump short
-        // by setting the y velocity to half of what it was
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        {
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f){
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * .5f);
         }
 
         UpdateAnimation(dirX);
     }
 
-    private void UpdateAnimation(float dirX)
-    {
-
+    private void UpdateAnimation(float dirX){
         // If player is on the move
-        if (dirX != 0f)
-        {
-            state = MovementState.running;
-            // if player going left
-            if (dirX < 0f)
-            {
-                sprite.flipX = false;
-            }
-            // if player going right
-            if (dirX > 0f)
-            {
-                sprite.flipX = true;
+        if (dirX != 0f) {
 
-            } 
+            state = MovementState.running;
+
+            // if player going left
+            if (dirX < 0f) sprite.flipX = false;
+            
+            // if player going right
+            if (dirX > 0f) sprite.flipX = true;
         } 
-        else
-        {
+        else {
             state = MovementState.idle;
         }
 
        
 
-        if (rb.velocity.y > .1f)
-        {
-            state = MovementState.jumping;
-        } 
-        else if (rb.velocity.y < -.1f)
-        {
-            state = MovementState.falling;
-        }
+        if (rb.velocity.y > .1f)  state = MovementState.jumping;
+        else if (rb.velocity.y < -.1f) state = MovementState.falling;
 
         anim.SetInteger("state",(int)state);
      
