@@ -37,9 +37,9 @@ public class PlayerLife : MonoBehaviour
     }
 
     public void Respawn(){
-        anim.SetTrigger("RespawnTrigger");
         transform.position = respawnPoint.transform.position;
         rb.bodyType = RigidbodyType2D.Dynamic;
+        anim.SetTrigger("RespawnTrigger");
     }
 
 }
