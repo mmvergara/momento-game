@@ -10,6 +10,7 @@ TagManager:
   - Void
   - Spike
   - Saw
+  - RespawnPoint
   layers:
   - Default
   - TransparentFX

@@ -6,11 +6,12 @@ public class PlayerLife : MonoBehaviour
 {
     private Animator anim;
     private Rigidbody2D rb;
-    private Vector2 respawnPoint;
+    private GameObject respawnPoint;
     GameLogic gameLogic;
     private void Start() {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        respawnPoint = GameObject.FindGameObjectWithTag("RespawnPoint");
         gameLogic = GameObject.FindGameObjectWithTag("GameLogic").GetComponent<GameLogic>();
     }
 
@@ -36,7 +37,9 @@ public class PlayerLife : MonoBehaviour
     }
 
     public void Respawn(){
-         gameLogic.restartLevel(); 
+        anim.SetTrigger("RespawnTrigger");
+        transform.position = respawnPoint.transform.position;
+        rb.bodyType = RigidbodyType2D.Dynamic;
     }
 
 }

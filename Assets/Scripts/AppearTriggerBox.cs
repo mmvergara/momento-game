@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerBox : MonoBehaviour
+public class AppearTriggerBox : MonoBehaviour
 {
     [SerializeField] public GameObject[] objectsToActivate;
     private void Start() {
