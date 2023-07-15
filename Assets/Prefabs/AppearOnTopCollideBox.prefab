@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5115078790613396921}
   - component: {fileID: 7596131166977308267}
   m_Layer: 0
-  m_Name: AppearOnCollideBox
+  m_Name: AppearOnTopCollideBox
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
